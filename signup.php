@@ -1,5 +1,5 @@
 <?php
-//include "include/signup.inc.php"
+
 ?>
 
 <!DOCTYPE html>
@@ -32,7 +32,7 @@
 
 <div class="mt-4 text-center">
     <h1>Register</h1>
-    <form method="post" action="include/signup.inc.php" class="mt-5" style="max-width: 420px;margin: auto">
+    <form method="post" action="include/signup.inc.php" class="mt-4" style="max-width: 420px;margin: auto">
         <div  class="form-floating mb-3">
             <input name="name" type="text" class="form-control" id="floatingInput" placeholder="naam">
             <label for="floatingInput">Full name</label>
@@ -57,7 +57,36 @@
         <br>
         <button name="submit" class="btn btn-primary mt-2" type="submit">Register</button>
     </form>
+
+    <?php
+    if (isset($_GET["error"])) {
+        if ($_GET["error"] == "emptyinput") {
+            echo "<p class='text-danger'>Je hebt geen gegevens ingevult!</p>";
+        }
+        else if ($_GET["error"] == "invaliduid") {
+            echo "<p class='text-danger'>Kies een andere gebruikersnaam!</p>";
+        }
+        else if ($_GET["error"] == "invalidemail") {
+            echo "<p class='text-danger'>Kies een andere E-mail!</p>";
+        }
+        else if ($_GET["error"] == "nomatch") {
+            echo "<p class='text-danger'>De wachtwoorden komen niet overeen met elkaar!</p>";
+        }
+        else if ($_GET["error"] == "usernametaken") {
+            echo "<p class='text-danger'>Deze gebruikersnaam is al in gebruik kies een andere!</p>";
+        }
+        else if ($_GET["error"] == "stmtfailed") {
+            echo "<p class='text-danger'>Iets ging verkeerd probeer het opnieuw!</p>";
+        }
+        else if ($_GET["error"] == "none") {
+            echo "<p class='text-success'>Welkom!</p>";
+        }
+    }
+    ?>
+
     <p class="mt-2">Already have an account log in <a href="login.php">Here</a></p>
+
+
 
 </div>
 

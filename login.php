@@ -30,9 +30,9 @@
 </nav>
 <div class=" mt-4 text-center">
     <h1>Log In</h1>
-    <form method="post" action="/include/login.inc.php" class="mt-5" style="max-width: 420px; margin: auto">
+    <form method="post" action="include/login.inc.php" class="mt-5" style="max-width: 420px; margin: auto">
         <div  class="form-floating mb-3">
-            <input name="username/email" type="text" class="form-control" id="floatingInput" placeholder="username/email">
+            <input name="uid" type="text" class="form-control" id="floatingInput" placeholder="username/email">
             <label for="floatingInput">Username/Email address</label>
         </div>
         <div class="form-floating">
@@ -44,6 +44,20 @@
         <br>
         <button name="submit" class="btn btn-primary mt-3" type="submit">Log In</button>
     </form>
+
+    <?php
+    if (isset($_GET["error"])) {
+        if ($_GET["error"] == "emptyinput") {
+            echo "<p class='text-danger'>Je hebt geen gegevens ingevult!</p>";
+        }
+        else if ($_GET["error"] == "wronglogin") {
+            echo "<p class='text-danger'>Verkeerde login info!</p>";
+        }
+
+    }
+    ?>
+
+
     <p class="mt-2">Dont have an account yet register <a href="signup.php">Here</a></p>
 
 </div>
