@@ -1,5 +1,5 @@
 <?php
-
+//test
 
 function emptyInputSignup($name, $email, $username, $pwd, $pwdRepeat) {
     $results = null;

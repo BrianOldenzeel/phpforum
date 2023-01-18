@@ -1,6 +1,6 @@
 <?php
 
-
+//test
 if (isset($_POST["submit"])) {
 
     $username = $_POST["uid"];
