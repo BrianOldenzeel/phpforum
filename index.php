@@ -1,7 +1,5 @@
 <?php
-
-
-include_once 'header.php'
+include_once 'header.php';
 ?>
 
 <!DOCTYPE html>
@@ -32,7 +30,9 @@ include_once 'header.php'
                 <label for="exampleFormControlInput1" class="form-label">Title</label>
                 <input name="title" type="text" class="form-control" id="exampleFormControlInput1" placeholder="">
             </div>
-                <input id="title" type="hidden" name="user_id" value="">
+                <?php
+                echo '<input id="title" type="hidden" name="user_id" value="' . $_SESSION["useruid"] . '">'
+                ?>
             <div class="mb-3">
                 <label for="exampleFormControlTextarea1" class="form-label">content</label>
                 <textarea name="content" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>

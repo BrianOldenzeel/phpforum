@@ -1,6 +1,6 @@
 <?php
     session_start();
-    //test
+//    echo $_SESSION['useruid'];
 ?>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">

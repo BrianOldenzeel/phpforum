@@ -102,7 +102,7 @@ function loginUser($conn, $username, $pwd) {
     $uidExists = uidExists($conn, $username, $username);
 
     if ($uidExists === false) {
-        header("location: ../accounts/login.php?error=wronglogin");
+        header("location: ../login.php?error=wronglogin");
         exit();
     }
 
@@ -122,15 +122,15 @@ function loginUser($conn, $username, $pwd) {
 }
 
 
-function createThread($conn, $title, $content) {
-    $sql = "INSERT INTO thread (title, content) VALUES (?, ?);";
+function createThread($conn, $title, $content, $user_id) {
+    $sql = "INSERT INTO thread (title, content, user_id) VALUES (?, ?, ?);";
     $stmt = mysqli_stmt_init($conn);
     if (!mysqli_stmt_prepare($stmt, $sql)) {
         header("../signup.php?error=stmtfailed");
         exit();
     }
 
-    mysqli_stmt_bind_param($stmt, "ss", $title, $content);
+    mysqli_stmt_bind_param($stmt, "sss", $title, $content, $user_id);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
     header("location: ../index.php?error=none");
@@ -147,3 +147,4 @@ function emptythread( $title, $content) {
     }
     return $results;
 }
+
