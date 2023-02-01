@@ -1,47 +1,74 @@
 <?php
 include_once 'header.php';
+require_once('include/dbh.inc.php');
+    $query = "SELECT * FROM thread";
+    $results = mysqli_query($conn, $query)
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Main page</title>
-
-
-    <link href="    https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
-
-</head>
 <body>
 
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-    Create Topic
-</button>
+<section>
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="display-6">Topics</h2>
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            Create Topic
+                        </button>
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content p-3">
-            <form method="post" action="include/thread.inc.php">
-            <div class="mb-3">
-                <label for="exampleFormControlInput1" class="form-label">Title</label>
-                <input name="title" type="text" class="form-control" id="exampleFormControlInput1" placeholder="">
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content p-3">
+                                    <form method="post" action="include/thread.inc.php">
+                                        <div class="mb-3">
+                                            <label for="exampleFormControlInput1" class="form-label">Title</label>
+                                            <input name="title" type="text" class="form-control" id="exampleFormControlInput1" placeholder="">
+                                        </div>
+                                        <?php
+                                        echo '<input id="title" type="hidden" name="user_id" value="' . $_SESSION["useruid"] . '">'
+                                        ?>
+                                        <div class="mb-3">
+                                            <label for="exampleFormControlTextarea1" class="form-label">content</label>
+                                            <textarea name="content" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                        </div>
+                                        <button name="submit" type="submit" class="btn btn-primary mb-3">Submit</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <?php
+                        while($row = mysqli_fetch_assoc($results))
+                        {
+                        ?>
+                        <a class="text-decoration-none text-dark" href="thread.php?=<?php echo $row['id']?>">
+                        <div class="card mt-3">
+                            <div class="card-header">
+                                Geplaats op: <?php echo $row['date'] ?>
+                                Door: <?php echo $row['user_id'] ?>
+                            </div>
+                            <div class="card-body">
+                                <h3 class="card-title"><?php echo $row['title'] ?></h3>
+                                <p class="card-text"><?php echo $row['content'] ?></p>
+                            </div>
+                        </div>
+                        </a>
+                        </form>
+                        <?php
+                        }
+
+                        ?>
+                        </div>
+                    </div>
+                </div>
             </div>
-                <?php
-                echo '<input id="title" type="hidden" name="user_id" value="' . $_SESSION["useruid"] . '">'
-                ?>
-            <div class="mb-3">
-                <label for="exampleFormControlTextarea1" class="form-label">content</label>
-                <textarea name="content" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-            </div>
-            <button name="submit" type="submit" class="btn btn-primary mb-3">Submit</button>
-            </form>
         </div>
     </div>
-</div>
+</section>
 
 
 
