@@ -13,10 +13,10 @@ require_once('include/dbh.inc.php');
             <div class="col">
                 <div class="card">
                     <div class="card-header">
-                        <h2 class="display-6">Topics</h2>
+                        <h2 class="display-6">Threads</h2>
                         <!-- Button trigger modal -->
                         <button type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#exampleModal">
-                            Create Topic
+                            Create Thread
                         </button>
 
                         <!-- Modal -->
@@ -45,7 +45,7 @@ require_once('include/dbh.inc.php');
                         while($row = mysqli_fetch_assoc($results))
                         {
                         ?>
-                        <a class="text-decoration-none text-dark" href="thread.php?=<?php echo $row['id']?>">
+                        <a class="text-decoration-none text-dark" href="thread.php?thread=<?php echo $row['id']?>">
                         <div class="card mt-3">
                             <div class="card-header">
                                 Geplaats op: <?php echo $row['date'] ?>
@@ -57,7 +57,6 @@ require_once('include/dbh.inc.php');
                             </div>
                         </div>
                         </a>
-                        </form>
                         <?php
                         }
 
@@ -67,7 +66,7 @@ require_once('include/dbh.inc.php');
                 </div>
             </div>
         </div>
-    </div>
+
 </section>
 
 <section>
