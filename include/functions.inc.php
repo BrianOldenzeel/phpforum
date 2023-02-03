@@ -148,3 +148,29 @@ function emptythread( $title, $content) {
     return $results;
 }
 
+function createTopic($conn, $title, $content, $user_id, $thread_id) {
+    $sql = "INSERT INTO topic (title, content, user_id, thread_id) VALUES (?, ?, ?, ?);";
+    $stmt = mysqli_stmt_init($conn);
+    if (!mysqli_stmt_prepare($stmt, $sql)) {
+        header("../signup.php?error=stmtfailed");
+        exit();
+    }
+
+    mysqli_stmt_bind_param($stmt, "ssss", $title, $content, $user_id, $thread_id);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+    header("location: ../thread.php?thread=$thread_id");
+    exit();
+}
+
+function emptytopic( $title, $content) {
+    $results = null;
+    if (empty($title) || empty($content)) {
+        $results = true;
+    }
+    else {
+        $results = false;
+    }
+    return $results;
+}
+

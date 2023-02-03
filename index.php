@@ -15,10 +15,15 @@ require_once('include/dbh.inc.php');
                     <div class="card-header">
                         <h2 class="display-6">Threads</h2>
                         <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#exampleModal">
-                            Create Thread
-                        </button>
 
+                        <?php
+                        if (isset($_SESSION["useruid"])) {
+
+                            echo '<button type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            Create Thread
+                        </button>';
+                            }
+                        ?>
                         <!-- Modal -->
                         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
@@ -29,7 +34,9 @@ require_once('include/dbh.inc.php');
                                             <input name="title" type="text" class="form-control" id="exampleFormControlInput1" placeholder="">
                                         </div>
                                         <?php
-                                        echo '<input id="title" type="hidden" name="user_id" value="' . $_SESSION["useruid"] . '">'
+
+                                            echo '<input id="title" type="hidden" name="user_id" value="' . $_SESSION["useruid"] . '">';
+
                                         ?>
                                         <div class="mb-3">
                                             <label for="exampleFormControlTextarea1" class="form-label">content</label>
@@ -69,9 +76,7 @@ require_once('include/dbh.inc.php');
 
 </section>
 
-<section>
 
-</section>
 
 
 
