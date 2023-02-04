@@ -76,7 +76,7 @@ if (isset($_GET["topic"])) {
 
 
                             ?>
-                            <a class="text-decoration-none text-dark" href="topic.php?topic=<?php echo $row['id']?>">
+
                                 <div class="card mt-3">
                                     <div class="card-header">
                                         Geplaats op: <?php echo $row['date'] ?>
@@ -87,7 +87,7 @@ if (isset($_GET["topic"])) {
                                         <p class="card-text"><?php echo $row['content'] ?></p>
                                     </div>
                                 </div>
-                            </a>
+
                             <?php
                         }
 
