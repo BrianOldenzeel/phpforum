@@ -1,31 +1,31 @@
 <?php
 include_once 'header.php';
 require_once('include/dbh.inc.php');
-if (isset($_GET["thread"])) {
-    $id = $_GET['thread'];
-    $query = "SELECT * FROM thread WHERE ID='$id'";
+if (isset($_GET["topic"])) {
+    $id = $_GET['topic'];
+    $query = "SELECT * FROM topic WHERE ID='$id'";
     $results = mysqli_query($conn, $query);
     $row = mysqli_fetch_assoc($results);
 }
 ?>
-    <div class="container mt-4">
-        <div class="row">
-            <div class="col">
-                <div class="card mt-3">
-                    <div class="card-header">
-                        Geplaats op: <?php echo $row['date'] ?>
-                        Door: <?php echo $row['user_id'] ?>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-title"><?php echo $row['title'] ?></h3>
-                        <p class="card-text"><?php echo $row['content'] ?></p>
-                    </div>
+<div class="container mt-4">
+    <div class="row">
+        <div class="col">
+            <div class="card mt-3">
+                <div class="card-header">
+                    Geplaats op: <?php echo $row['date'] ?>
+                    Door: <?php echo $row['user_id'] ?>
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title"><?php echo $row['title'] ?></h3>
+                    <p class="card-text"><?php echo $row['content'] ?></p>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
-<!--                        topic -->
+<!--                        reply -->
 
 <section>
     <div class="container mt-4">
@@ -33,31 +33,30 @@ if (isset($_GET["thread"])) {
             <div class="col">
                 <div class="card">
                     <div class="card-header">
-                        <h2 class="display-6">Topics</h2>
+                        <h2 class="display-6">Replies</h2>
                         <!-- Button trigger modal -->
-                        <?php
-                        if (isset($_SESSION["useruid"])) {
-
-                            echo '<button type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#exampleModal">
-                            Create Thread
-                        </button>';
-                        }
-                        ?>
+                        <button type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            Create a Reply
+                        </button>
 
                         <!-- Modal -->
                         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content p-3">
-                                    <form method="post" action="include/topic.inc.php">
+                                    <form method="post" action="include/reply.inc.php">
                                         <div class="mb-3">
                                             <label for="exampleFormControlInput1" class="form-label">Title</label>
                                             <input name="title" type="text" class="form-control" id="exampleFormControlInput1" placeholder="">
                                         </div>
                                         <?php
 
+                                        if (isset($_SESSION["useruid"])) {
                                             echo '<input id="title" type="hidden" name="user_id" value="' . $_SESSION["useruid"] . '">';
+                                        } else {
+                                            echo '<input id="title" type="hidden" name="user_id" value="Anoniem">';
+                                        }
 
-                                        echo '<input id="title" type="hidden" name="thread_id" value="' . $id  . '">';
+                                        echo '<input id="title" type="hidden" name="topic_id" value="' . $id  . '">';
                                         ?>
                                         <div class="mb-3">
                                             <label for="exampleFormControlTextarea1" class="form-label">content</label>
@@ -71,7 +70,7 @@ if (isset($_GET["thread"])) {
 
 
                         <?php
-                        $query = "SELECT * FROM topic WHERE thread_id ='$id'";
+                        $query = "SELECT * FROM reply WHERE topic_id ='$id'";
                         $results = mysqli_query($conn, $query);
                         while($row = mysqli_fetch_assoc($results)) {
 
@@ -102,10 +101,10 @@ if (isset($_GET["thread"])) {
 
 </section>
 
-    </body>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
-    </html>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
+</html>
 
 
 

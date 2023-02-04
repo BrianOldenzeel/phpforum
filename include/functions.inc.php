@@ -174,3 +174,30 @@ function emptytopic( $title, $content) {
     return $results;
 }
 
+
+function createReply($conn, $title, $content, $user_id, $topic_id) {
+    $sql = "INSERT INTO reply (title, content, user_id, topic_id) VALUES (?, ?, ?, ?);";
+    $stmt = mysqli_stmt_init($conn);
+    if (!mysqli_stmt_prepare($stmt, $sql)) {
+        header("../signup.php?error=stmtfailed");
+        exit();
+    }
+
+    mysqli_stmt_bind_param($stmt, "ssss", $title, $content, $user_id, $topic_id);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+    header("location: ../topic.php?topic=$topic_id");
+    exit();
+}
+
+function emptyreply( $title, $content)
+{
+    $results = null;
+    if (empty($title) || empty($content)) {
+        $results = true;
+    } else {
+        $results = false;
+    }
+    return $results;
+}
+
